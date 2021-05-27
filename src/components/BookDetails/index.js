@@ -40,6 +40,16 @@ export default function BookDetails({ books, bookId, actions, saved }) {
     <Icon icon="book-open" />
   );
 
+  const {
+    title,
+    author,
+    description,
+    publisher,
+    primaryIsbn13,
+    rank,
+    weeksOnList,
+  } = book;
+
   return (
     <StyledPage>
       <div>
@@ -51,15 +61,15 @@ export default function BookDetails({ books, bookId, actions, saved }) {
           saved={!!book}
         />
       </div>
-      <h1>{book.title.toLowerCase()}</h1>
-      <Author>{book.author}</Author>
+      <h1>{title.toLowerCase()}</h1>
+      <Author>{author}</Author>
       <h2>Description</h2>
-      <p>{book.description}</p>
+      <p>{description}</p>
       <h2>Details</h2>
-      {displayBook('Publisher', book.publisher)}
-      {displayBook('ISBN13', book.primaryIsbn13)}
-      {displayBook('Best Sellers Rank', book.rank)}
-      {displayBook('Weeks on Best Sellers List', book.weeksOnList)}
+      {displayBook('Publisher', publisher)}
+      {displayBook('ISBN13', primaryIsbn13)}
+      {displayBook('Best Sellers Rank', rank)}
+      {displayBook('Weeks on Best Sellers List', weeksOnList)}
     </StyledPage>
   );
 }

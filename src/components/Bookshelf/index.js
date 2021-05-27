@@ -25,11 +25,13 @@ export default function Bookshelf({ books, actions, saved }) {
   const [, view] = location.search.match(/view=(grid|list)/) || [];
   const [sortBy, setSortBy] = useState('title');
 
+  const handleNavigate = () => navigate('/books/new');
+
   return (
     <Page
       pageTitle="Your Saved Books"
       filters={[
-        <Button onClick={() => navigate('/books/new')} key="add-new">
+        <Button onClick={handleNavigate} key="add-new">
           <Icon icon="plus" /> Add new book
         </Button>,
         <Sorter setSortBy={setSortBy} sortBy={sortBy} />,
