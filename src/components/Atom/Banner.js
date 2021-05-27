@@ -36,10 +36,12 @@ const BannerWrapper = styled.header`
   margin: 0 auto;
 `;
 
+const handleClick = () => navigate('/');
+
 export default function Banner() {
   return (
     <BannerWrapper>
-      <Logo onClick={() => navigate('/')}>
+      <Logo onClick={handleClick}>
         <Brandmark />
         Bookcues
       </Logo>

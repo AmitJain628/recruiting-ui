@@ -39,24 +39,22 @@ const TextButton = styled.button`
 export const SaveButton = ({ book, saved, onSave, onRemove, className }) => {
   const [state, setState] = useState(saved);
 
+  const handleSave = () => {
+    onSave(book);
+    setState(true);
+  };
+
+  const handleRemove = () => {
+    onRemove(book.id);
+    setState(false);
+  };
+
   return state ? (
-    <TextButton
-      className={className}
-      onClick={() => {
-        onRemove(book.id);
-        setState(false);
-      }}
-    >
+    <TextButton className={className} onClick={handleRemove}>
       <Icon icon="check" /> Saved to List
     </TextButton>
   ) : (
-    <Button
-      className={className}
-      onClick={() => {
-        onSave(book);
-        setState(true);
-      }}
-    >
+    <Button className={className} onClick={handleSave}>
       <Icon icon="plus" /> Save to list
     </Button>
   );
