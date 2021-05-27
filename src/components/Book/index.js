@@ -13,19 +13,21 @@ import {
 } from './style';
 
 export default function Book({ book, onSave, onRemove, saved, view }) {
+  const { id, title, description, author } = book;
+
   return (
     <Wrapper view={view}>
       <Cover>
-        <Anchor to={`/books/${book.id}`}>
-          <img src={book.image_url} alt={book.title} />
+        <Anchor to={`/books/${id}`}>
+          <img src={book.image_url} alt={title} />
         </Anchor>
       </Cover>
       <Details>
         <Title>
-          <Anchor to={`/books/${book.id}`}>{book.title.toLowerCase()}</Anchor>
+          <Anchor to={`/books/${id}`}>{title.toLowerCase()}</Anchor>
         </Title>
-        <Author>{book.author}</Author>
-        {view === 'list' && <Description>{book.description}</Description>}
+        <Author>{author}</Author>
+        {view === 'list' && <Description>{description}</Description>}
         <SaveButton
           onSave={onSave}
           onRemove={onRemove}
