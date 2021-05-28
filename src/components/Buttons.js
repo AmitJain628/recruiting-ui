@@ -36,32 +36,32 @@ const TextButton = styled.button`
   }
 `;
 
-export const SaveButton = ({ book, saved, onSave, onRemove, className }) => {
+export const SaveButton = ({ saved, onSave, onRemove, className }) => {
   const [state, setState] = useState(saved);
-
-  const handleSave = () => {
-    onSave(book);
-    setState(true);
-  };
-
-  const handleRemove = () => {
-    onRemove(book.id);
-    setState(false);
-  };
-
   return state ? (
-    <TextButton className={className} onClick={handleRemove}>
+    <TextButton
+      className={className}
+      onClick={() => {
+        onRemove();
+        setState(false);
+      }}
+    >
       <Icon icon="check" /> Saved to List
     </TextButton>
   ) : (
-    <Button className={className} onClick={handleSave}>
+    <Button
+      className={className}
+      onClick={() => {
+        onSave();
+        setState(true);
+      }}
+    >
       <Icon icon="plus" /> Save to list
     </Button>
   );
 };
 
 SaveButton.propTypes = {
-  book: PropTypes.objectOf(PropTypes.string),
   saved: PropTypes.bool,
   onSave: PropTypes.func,
   onRemove: PropTypes.func,

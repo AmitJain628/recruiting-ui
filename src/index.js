@@ -5,14 +5,29 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 
 import App from './App';
-import rootReducer from './store/reducers';
-import defaultState from './store/state';
-import { getValueFromLocalStorage, setValueFromLocalStorage } from './utils';
+import rootReducer, { initialState as defaultState } from './reducers';
 import './index.css';
 
-const loadState = () => getValueFromLocalStorage('state');
+const loadState = () => {
+  try {
+    const serializedState = localStorage.getItem('state');
+    if (serializedState === null) {
+      return null;
+    }
+    return JSON.parse(serializedState);
+  } catch {
+    return null;
+  }
+};
 
-const saveState = state => setValueFromLocalStorage('state', state);
+const saveState = state => {
+  try {
+    const serializedState = JSON.stringify(state);
+    localStorage.setItem('state', serializedState);
+  } catch {
+    // ignore
+  }
+};
 
 const initialState = loadState() || defaultState;
 
