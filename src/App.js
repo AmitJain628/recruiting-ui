@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import { Router } from '@reach/router';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import * as listActions from './store/actions/lists';
-import * as bookActions from './store/actions/books';
+import * as listActions from './actions/lists';
+import * as bookActions from './actions/books';
 
 import Bookshelf from './components/Bookshelf';
 import BookDetails from './components/BookDetails';
 import AddBook from './components/AddBook';
-import Banner from './components/Atom/Banner';
+import Banner from './components/Banner';
 import Overview from './Overview';
 import './App.css';
 

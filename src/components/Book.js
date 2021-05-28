@@ -1,5 +1,9 @@
+import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components/macro';
+
 import { Link } from '@reach/router';
+import { SaveButton } from './Buttons';
 
 const Anchor = styled(Link)`
   text-decoration: none;
@@ -34,22 +38,22 @@ const Wrapper = styled.article`
   ${({ view }) => {
     if (view === 'list') {
       return `
-      align-items: flex-start;
-      width: 100%;
-      padding: 10px;
-      ${Cover} {
-          margin-right: 78px;
-      }
-    `;
+        align-items: flex-start;
+        width: 100%;
+        padding: 10px;
+        ${Cover} {
+            margin-right: 78px;
+        }
+      `;
     }
     return `
-    &&, ${Details} {
-      display: flex;
-      align-items: center;
-      flex-direction: column;
-        text-align: center;
-    }
-`;
+      &&, ${Details} {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+          text-align: center;
+      }
+  `;
   }}
 `;
 
@@ -83,4 +87,30 @@ const Description = styled.p`
   margin: 1em 0 2em 0;
 `;
 
-export { Anchor, Author, Description, Title, Wrapper, Cover, Details };
+export default function Book({ book, onSave, onRemove, saved, view }) {
+  return (
+    <Wrapper key={book.id} view={view}>
+      <Cover>
+        <Anchor to={`/books/${book.id}`}>
+          <img src={book.image_url} alt={book.title} />
+        </Anchor>
+      </Cover>
+      <Details>
+        <Title>
+          <Anchor to={`/books/${book.id}`}>{book.title.toLowerCase()}</Anchor>
+        </Title>
+        <Author>{book.author}</Author>
+        {view === 'list' && <Description>{book.description}</Description>}
+        <SaveButton onSave={onSave} onRemove={onRemove} saved={saved} />
+      </Details>
+    </Wrapper>
+  );
+}
+
+Book.propTypes = {
+  book: PropTypes.objectOf(PropTypes.string),
+  saved: PropTypes.bool,
+  onSave: PropTypes.func,
+  onRemove: PropTypes.func,
+  view: PropTypes.string,
+};
